@@ -1,17 +1,20 @@
 <?php
-session_start();
+// Fetch data from the API
 include 'navbar.php'; 
-    include("db.php");
+  
+  include("db.php");
 	include("function.php");
   
-    check_login($con);
-  
-
-
+  check_login($con);
 $json_data = file_get_contents('https://fakestoreapi.com/products');
 
 // Decode JSON data into a PHP array
 $products = json_decode($json_data, true);
+
+// Sort products by name in ascending order
+usort($products, function ($a, $b) {
+    return strcmp($a['title'], $b['title']);
+});
 ?>
 
 <!DOCTYPE html>
@@ -21,16 +24,20 @@ $products = json_decode($json_data, true);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product List</title>
     <style>
+        .search-bar {
+            margin: 20px;
+            text-align: center;
+        }
         .product-container {
-            display: flex;
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
             gap: 20px;
+            padding: 20px;
         }
         .product-card {
             border: 1px solid #ccc;
             border-radius: 10px;
             padding: 20px;
-            width: 200px;
             text-align: center;
         }
         .product-img {
@@ -51,9 +58,26 @@ $products = json_decode($json_data, true);
             font-size: 14px;
         }
     </style>
+    <script>
+        function filterProducts() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const products = document.querySelectorAll('.product-card');
+            products.forEach(product => {
+                const title = product.querySelector('.product-title').innerText.toLowerCase();
+                if (title.includes(query)) {
+                    product.style.display = 'block';
+                } else {
+                    product.style.display = 'none';
+                }
+            });
+        }
+    </script>
 </head>
 <body>
     <h1>Product List</h1>
+    <div class="search-bar">
+        <input type="text" id="searchInput" onkeyup="filterProducts()" placeholder="Search for products...">
+    </div>
     <div class="product-container">
         <?php
         // Loop through each product and display its details

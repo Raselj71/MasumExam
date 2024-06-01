@@ -1,5 +1,5 @@
 <?php include 'navbar.php'; 
-  session_start();
+ 
   include("db.php");
 	include("function.php");
   
