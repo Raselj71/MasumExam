@@ -1,0 +1,55 @@
+.login-container {
+    width: 100vw;
+
+    display: flex;
+    justify-content: center;
+}
+
+.form-container {
+    margin-top: 3rem;
+    padding: 3rem;
+    background-color: #ffffff;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    width: 25%;
+    border-radius: 5px;
+}
+
+.form-heading {
+    margin-bottom: 2rem;
+    text-align: center;
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.login-input {
+    width: 100%;
+    height: 5vh;
+    padding-left: 1rem;
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 7px;
+    background-color: var(--body-color);
+    border: none;
+    border-radius: 5px;
+
+}
+
+.login-button {
+    background-color: #72B261;
+    color: white;
+    font-size: 20px;
+    font-family: "Be Vietnam Pro",
+        sans-serif;
+    margin-top: 10px;
+}
+
+.signup-text {
+    margin-top: 15px;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.signup-text a {
+    text-decoration: underline;
+    color: #72B261;
+}
